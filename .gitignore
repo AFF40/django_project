@@ -1,0 +1,87 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribución / empaquetado
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+myenv/
+
+# Archivos del entorno
+*.env
+*.env.*
+
+# SQLite database
+*.sqlite3
+
+# Archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración del editor de texto
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de instalación
+*.log
+
+# Archivos de Django
+*.pot
+*.pyc
+*.pyo
+db.sqlite3
+
+# Media folder
+/media
+/media/*
+
+# Static files
+/static
+/static/*
+
+# Archivos de testeo / cobertura
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Distribución / empaquetado
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Archivos generados por paquetes de terceros
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node artifacts
+node_modules/
+
+# Archivos de configuración de Docker
+docker-compose.yml
+docker-compose.override.yml
+.dockerignore
+
+# Archivos de configuración de Heroku
+Procfile
