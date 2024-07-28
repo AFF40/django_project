@@ -28,7 +28,6 @@
                 zoom: 13
             });
 
-            // Añadir marcadores de los restaurantes
             var restaurant_locations = {{ restaurant_locations|safe }};
             restaurant_locations.forEach(function(restaurant) {
                 var marker = new google.maps.Marker({
@@ -47,7 +46,6 @@
             });
         }
 
-        // Inicializar el mapa
         google.maps.event.addDomListener(window, 'load', initMap);
     </script>
 </body>

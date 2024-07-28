@@ -4,7 +4,7 @@ from django.db import models
 from urllib.parse import urlparse, parse_qs
 
 class User(AbstractUser):
-    is_owner = models.BooleanField(default=False)  # Agregar el campo is_owner
+    is_owner = models.BooleanField(default=False) 
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='management_users',
@@ -22,7 +22,7 @@ class User(AbstractUser):
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    location_url = models.URLField()  # URL que contiene la latitud y longitud
+    location_url = models.URLField()  
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='restaurants')
 
     def __str__(self):
@@ -39,7 +39,6 @@ class Restaurant(models.Model):
         return float(query_params.get('lng', [0])[0])
 
     def clean(self):
-        # Validación personalizada: verificar que la URL contenga latitud y longitud
         parsed_url = urlparse(self.location_url)
         query_params = parse_qs(parsed_url.query)
         if 'lat' not in query_params or 'lng' not in query_params:
@@ -61,6 +60,5 @@ class Product(models.Model):
         return self.name
 
     def clean(self):
-        # Validación personalizada: el precio no puede ser negativo
         if self.price < 0:
             raise ValidationError('El precio no puede ser negativo.')

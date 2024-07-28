@@ -1,4 +1,3 @@
-# urls.py
 from django.urls import path, include
 from .views import login_view, register_view, logout_view, restaurant_map_view, view_menu, restaurant_settings
 from rest_framework.routers import DefaultRouter

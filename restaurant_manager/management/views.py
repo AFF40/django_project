@@ -1,4 +1,3 @@
-# views.py
 from rest_framework import viewsets
 from .models import Restaurant, Menu, Product, User
 from .serializers import RestaurantSerializer, MenuSerializer, ProductSerializer, UserSerializer, LoginSerializer
@@ -47,10 +46,8 @@ class LoginView(APIView):
 @login_required
 def restaurant_map_view(request):
     try:
-        # Obtener todos los restaurantes
         restaurants = Restaurant.objects.all()
         
-        # Extraer latitud y longitud de la URL
         restaurant_locations = []
         for restaurant in restaurants:
             match = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', restaurant.location_url)
@@ -63,11 +60,9 @@ def restaurant_map_view(request):
                     'longitude': longitude
                 })
         
-        # Verifica si el usuario es dueño de algún restaurante
         user_restaurants = Restaurant.objects.filter(owner=request.user)
         is_owner = request.user.is_owner if request.user.is_authenticated else False
         
-        # Debug: Imprimir información del usuario y restaurantes
         print(f"User: {request.user.username}, is_owner: {is_owner}")
         for restaurant in user_restaurants:
             print(f"Restaurant: {restaurant.name}, Location: {restaurant.location_url}")
@@ -90,17 +85,17 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            print(f"Attempting login for username: {username}")  # Debug line
+            print(f"Attempting login for username: {username}")  
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                print(f"Login successful for username: {username}")  # Debug line
+                print(f"Login successful for username: {username}")  
                 login(request, user)
                 return redirect('restaurant_map')
             else:
-                print(f"Login failed for username: {username}")  # Debug line
+                print(f"Login failed for username: {username}")  
                 messages.error(request, 'Invalid username or password')
         else:
-            print("Form submission invalid")  # Debug line
+            print("Form submission invalid")  
             messages.error(request, 'Invalid form submission')
     else:
         form = LoginForm()
@@ -116,7 +111,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('restaurant_map')  # Redirigir a la página del mapa después de registrar
+            return redirect('restaurant_map')  
     else:
         form = UserCreationForm()
     return render(request, 'management/register.html', {'form': form})
@@ -135,14 +130,12 @@ def restaurant_locations_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirigir a la página de inicio de sesión después de cerrar sesión
+    return redirect('login')  
 
 @login_required
 def view_menu(request):
-    # Lógica para ver el menú
     return render(request, 'management/view_menu.html')
 
 @login_required
 def restaurant_settings(request):
-    # Lógica para ajustar el restaurante
     return render(request, 'management/restaurant_settings.html')
